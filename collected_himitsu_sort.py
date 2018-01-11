@@ -1,8 +1,9 @@
 import os, csv
 import random
-import himitsu_data_gd_4
+import himitsu_data_gd_6
 import pandas as pd
 import numpy as np
+import re
 
 
 
@@ -21,9 +22,14 @@ def read_csv(csv_data):
 			row = row.replace('かならず実現するメモ帳', 'かならず実現する予定メモ帳')
 			row = row.replace('穴掘り機', '穴ほり機')
 			row = row.replace('重量ペンキ', '重力ペンキ')
-			line = row.split(",")
+			row = row.replace('流行性ネコジャラシビールス', '流行性ネコシャクシビールス')
+			row = row.replace('コンピュータペンシル', 'コンピューターペンシル')
+
+			for i in range(101):
+				row = row.replace(str(i), '')
+			#line = row.split(",")
+			line = [i for i in re.split(r',', row) if i != ""]
 			collected.append(line)
-			
 			
 	return collected
 
