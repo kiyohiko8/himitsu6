@@ -6,10 +6,11 @@
 #collected himitsu-data by google form 
 import os, csv
 import random
-import himitsu_data_gd_4
+import himitsu_data_gd_6
 import pandas as pd
 import numpy as np
 import collected_himitsu_sort
+import re
 
 
 #訓練データの作成	
@@ -28,8 +29,7 @@ def mk_x_train(all_word_list, collected, sorted):
 					for i, word in enumerate(all_word_list):
 						if word == x[1]:
 							x_data[i] = 1
-							cnt += 1
-						
+							cnt += 1						
 						else:
 							continue
 				else:
@@ -37,12 +37,9 @@ def mk_x_train(all_word_list, collected, sorted):
 			else:
 				break
 						
-	
-
-
 		x_train.append(x_data)
 					
-					
+										
 	return x_train
 
 
@@ -83,9 +80,14 @@ def read_csv(csv_data):
 			row = row.replace('かならず実現するメモ帳', 'かならず実現する予定メモ帳')
 			row = row.replace('穴掘り機', '穴ほり機')
 			row = row.replace('重量ペンキ', '重力ペンキ')
-			line = row.split(",")
+			row = row.replace('流行性ネコジャラシビールス', '流行性ネコシャクシビールス')
+			row = row.replace('コンピュータペンシル', 'コンピューターペンシル')
+
+			for i in range(101):
+				row = row.replace(str(i), '')
+			#line = row.split(",")
+			line = [i for i in re.split(r',', row) if i != ""]
 			collected.append(line)
-			
 			
 	return collected
 
