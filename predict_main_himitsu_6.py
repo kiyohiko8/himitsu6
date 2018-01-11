@@ -12,8 +12,8 @@ from keras.layers import Dense, Activation, Dropout
 from keras.optimizers import SGD
 from sklearn.model_selection import train_test_split
 from keras.models import model_from_json
-import himitsu_data_gd_4
-import collected_himitsu_data_4
+import himitsu_data_gd_6
+import collected_himitsu_data_6
 import collected_himitsu_sort
 import numpy as np
 import os
@@ -92,17 +92,17 @@ def mk_know_dic(x, y, vec):
 if __name__ == "__main__":
 
 	#全ひみつ道具データの読み込み
-	himitsu  = himitsu_data_gd_4.mk_allword_list()
+	himitsu  = himitsu_data_gd_6.mk_allword_list()
 	#ひみつ道具ベクトルの作成
-	word_vec = himitsu_data_gd_4.mk_vec(himitsu)
+	word_vec = himitsu_data_gd_6.mk_vec(himitsu)
 	#収集データの読み込み
-	collected = collected_himitsu_data_4.read_csv("himitsu_data.csv")
+	collected = collected_himitsu_data_6.read_csv("himitsu_data.csv")
 	#出現順にsortしたデータの読み込み
 	sorted   = collected_himitsu_sort.count_sort(collected, himitsu)
 	
 	#学習結果の読み込み
-	model = model_from_json(open('predict_model_himitsu_1.json').read())
-	model.load_weights('predict_weights_himitsu_1.h5')
+	model = model_from_json(open('predict_model_himitsu_b.json').read())
+	model.load_weights('predict_weights_himitsu_b.h5')
 	
 	#概要の出力
 	model.summary();
